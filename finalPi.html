@@ -1,0 +1,122 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pie Chart</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pieChart" width="400" height="400"></canvas>
+    <script src="script.js"></script>
+</body>
+
+
+<script>
+    
+var data = [
+    { label: budget1[finalindex], value: 20, color: "#ff0000" },
+    { label: budget2[finalindex], value: 35, color: "#00ff00" },
+    { label: budget3[finalindex], value: 30, color: "#0000ff" },
+    { label: budget4[finalindex], value: 5, color: "#ffff00" }
+];
+
+function drawPieChart(canvasId, data) {
+    var canvas = document.getElementById(canvasId);
+    var ctx = canvas.getContext("2d");
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = Math.min(centerX, centerY) - 5;
+
+    var totalValue = data.reduce((sum, item) => sum + item.value, 0);
+
+    var startAngle = 0;
+    data.forEach(function (item) {
+        var sliceAngle = (2 * Math.PI * item.value) / totalValue;
+
+        ctx.fillStyle = item.color;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+        ctx.closePath();
+        ctx.fill();
+
+        var labelX = centerX + (radius / 2) * Math.cos(startAngle + sliceAngle / 2);
+        var labelY = centerY + (radius / 2) * Math.sin(startAngle + sliceAngle / 2);
+        ctx.fillStyle = "#000000";
+        ctx.font = "12px Arial";
+        ctx.fillText(item.label, labelX, labelY);
+
+        startAngle += sliceAngle;
+    });
+}
+
+drawPieChart("pieChart", data);
+</script>
+
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      background-color:transparent;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(10, 345, 97, 5.1);
+      backdrop-filter:blur(3px);
+      border:2px solid rgb(209, 209, 209);
+      border-color: white;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #666;
+    }
+    input{
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body style="background-image:url(5092031.jpg)">
+  <div class="container">
+    <h1>Welcome to Our Website</h1>
+    <p id="ppp"></p>
+    <p>Thank you for visiting! We're excited to have you here.</p>
+    <p>Please feel free use our services regarding your expences.</p>
+    <input id="btn" type="submit" value="Get Started" onclick="fun3()">  </div>
+    <script src="data.js"></script>
+</body>
+<script scr="data.js"></script>
+</html>
+

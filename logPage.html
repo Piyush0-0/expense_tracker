@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <title>LoginPage</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .toggle-password {
+            width: auto;
+            height: fit-content;
+            position: absolute;
+            right:60px;
+            top: 80px;
+            cursor: pointer;
+            user-select: none;
+            color:black;
+            border-radius: 10px;
+        }
+
+        .for{
+            width: 400px;
+            height:240px;
+            color:black;
+            background:transparent;
+            backdrop-filter:blur(3px);
+            border:2px solid rgb(209, 209, 209);
+            border-radius:18px;
+            box-shadow:rgba(100, 213, 25, 4.828) 0px 0px 40px 2px, rgb(0, 119, 255) 0px 4px 6px -1px, rgb(255, 0, 0) 0px 0px 0px inset;
+            color:white;
+            user-select:none;
+            position: relative;
+            display: inline-block;
+        }
+        #btn{
+            background-color:deepskyblue;
+            color:black;
+            border-radius:100px;
+            width: 90px;
+            height: 30px;
+            box-shadow: rgba(0, 213, 255, 0.828) 0px 0px 40px 2px, rgb(0, 119, 255) 0px 4px 6px -1px, rgb(255, 0, 0) 0px 0px 0px inset;
+        }
+        input{
+            border:none;
+            border-radius: 12px;
+            width:240px;
+            height:22px;
+            margin-bottom:10px;
+            color:black;
+        }
+        .opp{
+            color:rgb(217, 0, 0);
+            font-size: 16px;
+            font-family: normal;
+        }
+    </style>
+
+</head>
+    <body style="color:white; background-image:url(5092031.jpg)">
+    <center><br><br><br><h1 style="color:black">Login</h1>
+        <div class="for">
+            <form>
+            <table>
+                <tr><br><br>
+                    <td style="color:black">Email:</td>
+                    <td><input id="mail" placeholder="Enter your email" type="text" inputmode="email"  required></td>
+                </tr>
+                <tr>
+                    <td style="color:black">Password:</td>
+                    <td><input placeholder="Enter your password" type="password" id="pass" required>
+                </tr>
+                </table>
+                <table>
+                <tr>
+                    <td><pre><a  href="#" class="opp">Forgot password?</a></pre></td>
+                    <td><pre>  <a href="regPage.html" class="opp">Create an account</a></pre></td>
+                </tr>
+            </table><br>
+            <input id="btn" type="submit" value="Login" onclick="fun1()">
+            </form>
+        </div>
+    </center>
+    </body>
+    <script src="data.js">
+        function fun(){
+
+            var specialChar = /[!@#$%^&*(),.?":{}|<>]/;
+            var digit = /\d/;
+            var uppercase = /[A-Z]/;
+            var errorMsg="";
+
+            if (!specialChar.test(pass)) {
+                errorMsg += "Enter a special character.<br>";
+                p.style.color="red";
+            }
+            if (!digit.test(pass)) {
+                errorMsg += "Enter a number.<br>";
+                p.style.color="red";
+            }
+            if (!uppercase.test(pass)) {
+                errorMsg += "Enter a uppercase letter.<br>";
+                p.style.color="red";
+            }
+            if (pass.length < 8){
+                errorMsg += "Password shuld least 8 characters long.<br>";
+                p.style.color="red";
+            }
+            if (errorMsg === "") {
+                p.innerHTML="Password meets all requirements.";
+                p.style.color="rgb(51, 255, 0)";
+            }else p.innerHTML=errorMsg;
+        }
+
+
+    
+    </script>
+</html>

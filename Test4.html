@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3b3b98;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 150vh;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .card {
+            background-color: transparent;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            border:3px solid red;
+            border-radius:18px;
+            box-shadow:rgba(100, 3, 250, 4.828) 0px 0px 40px 2px, rgb(0, 119, 255) 0px 4px 6px -1px, rgb(255, 0, 0) 0px 0px 0px inset;
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .balance {
+            font-size: 2em;
+            color: black;
+        }
+        .expenses-chart, .expenses-bars {
+            margin: 20px 0;
+        }
+        .pie-chart, .bar-chart {
+            background-color: #43456b;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .summary {
+            margin-top: 20px;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+        }
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        .summary-item .positive {
+            color: #00e676;
+        }
+        .summary-item .negative {
+            color: #ff5252;
+        }
+        .notifications, .tips {
+            background-color: #43456b;
+            padding: 1px;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        .not {
+            background-color: transparent;
+            border: 3px solid black;
+            border-radius:18px;
+            box-shadow:rgba(3, 25, 25, 4.828) 0px 0px 40px 2px, rgb(0, 119, 255) 0px 4px 6px -1px, rgb(255, 0, 0) 0px 0px 0px inset;
+            padding: 10px;
+            margin: 5px;
+        }
+        #chart-container {
+            width: 300px;
+            height: 300px;
+        }
+        .container2 {
+            max-width: 400px;
+            max-height: 500px;
+            margin: 20px auto;
+            background-color:#43456b;
+            border:2px solid rgb(209, 209, 209);
+            border-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(190, 100, 40, 9.07);
+            height:80hv;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body style="color:white; background-image:url(5092031.jpg)">
+    <div class="container">
+        <div class="card">
+            <h2 style="color:red">Overview</h2>
+            <div class="balance">Rs.50421.00</div>
+            <div class="expenses-chart">
+                <h3 style="color:orangered">Budget Details</h3>
+                <div id="chart-container">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+            </div>
+            <div class="notifications">
+                <h3 style="color:gold">Notifications:</h3>
+                <div class="not">
+                    Rs.90.00 have been credited to your bank account number:xxx156289xx,..
+                </div>
+                <div class="not">
+                    Rs.700.00 have been Debited to your bank account number:xxx156289xx,..
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h2 style="color:red">Monthly Expenses</h2>
+            <div id="monthlyExpensesBalance" class="balance">Rs.0.00</div>
+            <div class="expenses-bars">
+                <h3 style="color:orangered">My Expenses</h3>
+                <div id="chomu" class="bar-chart">
+                    Bank ID:XXX156289XXXX
+                </div>
+            </div>
+            <div class="summary">
+                <h3 style="color:black">Transaction History</h3>
+                <div class="container2">
+                    <form id="expenseForm">
+                        <div class="form-group">
+                            <label for="expenseName" style="color:white">Expense Name:</label>
+                            <input type="text" id="expenseName" placeholder="Enter expense name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseAmount" style="color:white">Amount:</label>
+                            <input type="text" id="expenseAmount" placeholder="Enter amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseDate" style="color:white">Date:</label>
+                            <input type="date" id="expenseDate" required>
+                        </div>
+                        <input type="submit" value="Add Expense">
+                    </form>
+                    <table id="expenseTable">
+                        <thead>
+                            <tr>
+                                <th style="color:black">Expense Name</th>
+                                <th style="color:black">Amount</th>
+                                <th style="color:black">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="tips" style="color:gold">
+                    <h3>Tips</h3>
+                    <div class="not" style="color:white">
+                        Consider Saving some money and invest it somewhere good
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Home', 'Bills', 'Clothing', 'Groceries', 'Drinks', 'College'],
+            datasets: [{
+                data: [35, 20, 10, 5, 5, 25],
+                backgroundColor: [
+                    '#4D4CFF',
+                    '#E84F4F',
+                    '#FFB74C', 
+                    '#68E34D', 
+                    '#FFBF00', 
+                    '#9C27B0'  
+                ],
+                borderColor: '#2D2A50',
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        color: '#fff',
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            return `${label}: ${value}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+        function updateMonthlyExpenses(amount) {
+            const monthlyExpensesElement = document.getElementById('monthlyExpensesBalance');
+            let currentBalance = parseFloat(monthlyExpensesElement.textContent.replace('Rs.', ''));
+            currentBalance += amount;
+            monthlyExpensesElement.textContent = 'Rs.' + currentBalance.toFixed(2);
+        }
+    
+        document.getElementById('expenseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            var expenseName = document.getElementById('expenseName').value;
+            var expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
+            var expenseDate = document.getElementById('expenseDate').value;
+    
+            if (isNaN(expenseAmount) || expenseAmount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+    
+            var expenseTable = document.getElementById('expenseTable').getElementsByTagName('tbody')[0];
+            var newRow = expenseTable.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            cell1.textContent = expenseName;
+            cell2.textContent = 'Rs.' + expenseAmount.toFixed(2);
+            cell3.textContent = expenseDate;
+    
+            updateMonthlyExpenses(expenseAmount);
+    
+            document.getElementById('expenseName').value = '';
+            document.getElementById('expenseAmount').value = '';
+            document.getElementById('expenseDate').value = '';
+        });
+    </script>
+    
+</html>

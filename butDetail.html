@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>budget Details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+
+
+    <style>
+        .center{
+            width: 600px;
+            height: 600px;
+            text-align: center;
+            font-size: large;
+            color: black;
+            background:transparent;
+            backdrop-filter:blur(3px);
+            border:3px solid white;
+            border-radius:18px;
+            box-shadow:rgba(3, 3, 250, 4.828) 0px 0px 40px 2px, rgb(0, 119, 255) 0px 4px 6px -1px, rgb(255, 0, 0) 0px 0px 0px inset;
+            user-select:none;
+            position: relative;
+            display: inline-block;
+        }
+
+        td input{
+            width:180px;
+            height: 25px;
+            margin:15px;
+            font-size: large;
+        }
+        th{
+            font-size: 24px;
+        }
+        input{
+            border:none;
+            border-radius: 12px;
+            width:240px;
+            height:22px;
+            margin-bottom:10px;
+            color:black;
+        }
+        button{
+            width:100px;
+            height: 35px;
+            margin:20px;
+            border:3px solid white;
+            border-radius:18px;
+            box-shadow:rgba(2000, 21, 25, 90.828) 0px 0px 40px 2px, rgb(0, 119, 255) 0px 4px 6px -1px, rgb(255, 0, 0) 0px 0px 0px inset;
+            background-color: red;
+            color:white;
+        }
+        .ooh
+        {
+            background-color: transparent;
+            border:3px solid black;
+            border-radius: 10px;
+        }
+    </style>
+
+
+<body style="color:white; background-image:url(5092031.jpg)">
+
+    <center><h1 style="color:black">Budget Details</h1></center>
+    <center><div class="center">
+        <br><b>TotalBudget: </b><input id="total" type="text" placeholder="Enter total Budget:" style="border: 2px solid black"><br><br><center>
+        <form action="">
+        <table class="ooh">
+            <th>Field</th>
+            <th>Spending</th>
+            <tr>
+                <td><input  id="fie1" type="text" placeholder="Enter Field " style="border: 2px solid black"></td>
+                <td><input id="amm1"  type="text" placeholder="Amount Spend in area" style="border: 2px solid black"></td>
+            </tr>
+            <tr>
+                <td><input id="fie2" type="text" placeholder="Enter Field" style="border: 2px solid black"></td>
+                <td><input id="amm2" type="text" placeholder="Amount Spend in area" style="border: 2px solid black"></td>
+            </tr>
+            <tr>
+                <td><input id="fie3" type="text" placeholder="Enter Field" style="border: 2px solid black" ></td>
+                <td><input id="amm3" type="text" placeholder="Amount Spend in area" style="border: 2px solid black"></td>
+            </tr>
+            <tr>
+                <td><input id="fie4" type="text" placeholder="Enter Field" style="border: 2px solid black" ></td>
+                <td><input id="amm4" type="text" placeholder="Amount Spend in area" style="border: 2px solid black"></td>
+            </tr>
+            <tr>
+                <td><input id="fie4" type="text" placeholder="Enter Field" style="border: 2px solid black" ></td>
+                <td><input id="amm4" type="text" placeholder="Amount Spend in area" style="border: 2px solid black"></td>
+            </tr>
+            <tr>
+                <td><input id="fie4" type="text" placeholder="Enter Field" style="border: 2px solid black" ></td>
+                <td><input id="amm4" type="text" placeholder="Amount Spend in area" style="border: 2px solid black"></td>
+            </tr>
+        <tr>
+        </tr>
+    </table>
+    <button onclick="final()">Submit</button>
+    </form>
+    </center>
+    </div>
+</center>
+
+
+
+</body>
+<script src="data.js"></script>
